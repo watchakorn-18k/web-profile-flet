@@ -19,8 +19,6 @@ from flet import (
     PopupMenuItem,
     PopupMenuButton
 )
-
-import webbrowser
 import i18n as lang
 
 
@@ -49,12 +47,12 @@ def homepage(page: Page):
                 src=f"https://media.discordapp.net/attachments/585069498986397707/1030030399201615932/unknown.png?width=428&height=428",
                 fit="cover",
                 height=40, width=40
-            ), on_click=lambda e:webbrowser.open('https://github.com/watchakorn-18k')),
+            ), on_click=lambda e:page.launch_url('https://github.com/watchakorn-18k')),
                 TextButton(content=Image(
                     src=f"https://media.discordapp.net/attachments/585069498986397707/1030031467050455090/unknown.png",
                     fit="cover",
                     height=40, width=40
-                ), on_click=lambda e:webbrowser.open('https://dev.to/watchakorn18k'))], alignment="center"),
+                ), on_click=lambda e:page.launch_url('https://dev.to/watchakorn18k'))], alignment="center"),
     )
     image_1 = Container(content=Image(
         src=f"https://media.discordapp.net/attachments/585069498986397707/1030043412516323388/unknown.png?width=428&height=428",
