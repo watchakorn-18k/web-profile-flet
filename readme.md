@@ -21,6 +21,13 @@ flet main.py -d -r -w
 https://web-profile-flet.pt07.repl.co/#/
 ```
 
+# i18n
+```
+i18n
+│─── app.en.yml
+│─── app.th.yml 
+```
+
 # Contribute
 Contributing
 Please refer to each project's style and contribution guidelines for submitting patches and additions. In general, we follow the "fork-and-pull" Git workflow.
