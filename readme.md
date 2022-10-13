@@ -1,6 +1,6 @@
 # Profile website from flet library on python
 
-<p align="center"><img src="https://media.discordapp.net/attachments/585069498986397707/1030060854202355742/rtset.gif" alt="example app wk" /></p>
+<p align="center"><img src="https://media.discordapp.net/attachments/585069498986397707/1030101354535981117/rtset.gif?width=408&height=428" alt="example app wk" /></p>
 
 # How to run ?
 ```
