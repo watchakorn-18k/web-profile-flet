@@ -4,8 +4,6 @@ from flet import (
     Icon,
     IconButton,
     Page,
-    PopupMenuButton,
-    PopupMenuItem,
     Text,
     colors,
     icons,
@@ -17,31 +15,14 @@ from flet import (
     TextButton,
     TextField,
     ListView,
-    ElevatedButton
+    ElevatedButton,
 )
 
 import webbrowser
 
 
-def main(page: Page):
-    page.title = "หน้าแรก"
-    page.horizontal_alignment = "center"
+def homepage(page: Page):
     lv = ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-
-    def theme_changed(e):
-        page.theme_mode = "dark" if page.theme_mode == "light" else "light"
-        page.update()
-
-    page.appbar = AppBar(
-        leading=Icon(icons.HOME),
-        leading_width=40,
-        title=Text("หน้าแรก"),
-        center_title=False,
-        bgcolor=colors.BLACK54,
-        actions=[
-            IconButton(icons.WB_SUNNY_OUTLINED, on_click=theme_changed)
-        ],
-    )
     container_1 = Container(
         content=Image(
             src=f"https://avatars.githubusercontent.com/u/74919942?v=4",
@@ -78,6 +59,7 @@ def main(page: Page):
         height=300,
         border_radius=20
     ), alignment=alignment.center)
+
     def Change_Text(e):
         if input_name.value != "":
             t_wel.value = f"Welcome {input_name.value}"
@@ -86,22 +68,43 @@ def main(page: Page):
             btn_con.disabled = True
             page.update()
         else:
-            # input_name.helper_text ="Please enter your name !"
             input_name.error_text = "Please enter your name !"
             page.update()
     t_wel = Text(value="Welcome to my page", text_align="center", size=30)
     input_name = TextField(
-        label="What your name ?",hint_text = "Your name",prefix_icon=icons.PERSON
+        label="What your name ?", hint_text="Your name", prefix_icon=icons.PERSON
     )
-    btn_con = ElevatedButton("Confirm",on_click=Change_Text)
+    btn_con = ElevatedButton("Confirm", on_click=Change_Text)
 
     form_1 = Container(content=Column([
-        t_wel, input_name,btn_con
-    ],horizontal_alignment="center"),padding=100)
-    content_all = [container_1, container_2, container_3, container_4, image_1, form_1]
+        t_wel, input_name, btn_con
+    ], horizontal_alignment="center"), padding=100)
+    content_all = [container_1, container_2,
+                   container_3, container_4, image_1, form_1]
     for i in content_all:
         lv.controls.append(i)
     page.add(lv)
+
+
+def main(page: Page):
+    page.title = "หน้าแรก"
+    page.horizontal_alignment = "center"
+
+    def theme_changed(e):
+        page.theme_mode = "dark" if page.theme_mode == "light" else "light"
+        page.update()
+
+    page.appbar = AppBar(
+        leading=Icon(icons.HOME),
+        leading_width=40,
+        title=Text("หน้าแรก"),
+        center_title=False,
+        bgcolor=colors.BLACK54,
+        actions=[
+            IconButton(icons.WB_SUNNY_OUTLINED, on_click=theme_changed)
+        ],
+    )
+    homepage(page)
 
 
 flet.app(port=8550, target=main, view=flet.WEB_BROWSER)
