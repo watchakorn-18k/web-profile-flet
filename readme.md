@@ -12,3 +12,8 @@ pip install -r requirements.txt
 
 flet main.py -d -r -w
 ```
+
+# Try it now
+```yaml
+https://web-profile-flet.pt07.repl.co/#/
+```
