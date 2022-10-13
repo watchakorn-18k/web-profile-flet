@@ -16,9 +16,12 @@ from flet import (
     TextField,
     ListView,
     ElevatedButton,
+    PopupMenuItem,
+    PopupMenuButton
 )
 
 import webbrowser
+import i18n as lang
 
 
 def homepage(page: Page):
@@ -33,11 +36,11 @@ def homepage(page: Page):
         margin=-50
     )
     container_2 = Container(
-        content=Text("Hi I'm Watchakorn", size=30),
+        content=Text(lang.t('app.introduce'), size=30),
         alignment=alignment.center,
     )
     container_3 = Container(
-        content=Text("สวัสดี ผม ชื่อ วัชกร", size=15),
+        content=Text("porton555@gmail.com", size=15),
         alignment=alignment.center,
     )
     container_4 = Container(
@@ -62,19 +65,19 @@ def homepage(page: Page):
 
     def Change_Text(e):
         if input_name.value != "":
-            t_wel.value = f"Welcome {input_name.value}"
+            t_wel.value = f"{lang.t('app.welcome')} {input_name.value}"
             t_wel.color = colors.GREEN
             input_name.disabled = True
             btn_con.disabled = True
             page.update()
         else:
-            input_name.error_text = "Please enter your name !"
+            input_name.error_text = lang.t('app.error_1')
             page.update()
-    t_wel = Text(value="Welcome to my page", text_align="center", size=30)
+    t_wel = Text(value=lang.t('app.Welcome_to_my_page'), text_align="center", size=30)
     input_name = TextField(
-        label="What your name ?", hint_text="Your name", prefix_icon=icons.PERSON
+        label=lang.t('app.ask_1'), hint_text=lang.t('app.hint_1'), prefix_icon=icons.PERSON
     )
-    btn_con = ElevatedButton("Confirm", on_click=Change_Text)
+    btn_con = ElevatedButton(lang.t('app.confirm'), on_click=Change_Text)
 
     form_1 = Container(content=Column([
         t_wel, input_name, btn_con
@@ -87,8 +90,24 @@ def homepage(page: Page):
 
 
 def main(page: Page):
-    page.title = "หน้าแรก"
+    lang.load_path.append('i18n')
+    lang.set('enable_memoization', True)
+    def lang_th(e):
+        lang.set('locale', 'th')
+        page.controls.pop()
+        homepage(page)
+        page.appbar.title = Text(lang.t('app.home'))
+        page.update()
+    def lang_en(e):
+        lang.set('locale', 'en')
+        page.controls.pop()
+        homepage(page)
+        page.appbar.title = Text(lang.t('app.home'))
+        page.update()
+
+    page.title = lang.t('app.home')
     page.horizontal_alignment = "center"
+    
 
     def theme_changed(e):
         page.theme_mode = "dark" if page.theme_mode == "light" else "light"
@@ -97,11 +116,18 @@ def main(page: Page):
     page.appbar = AppBar(
         leading=Icon(icons.HOME),
         leading_width=40,
-        title=Text("หน้าแรก"),
+        title=Text(lang.t('app.home')),
         center_title=False,
         bgcolor=colors.BLACK54,
         actions=[
-            IconButton(icons.WB_SUNNY_OUTLINED, on_click=theme_changed)
+            IconButton(icons.WB_SUNNY_OUTLINED, on_click=theme_changed),
+            PopupMenuButton(
+                items=[
+                    PopupMenuItem(text="ภาษาไทย",on_click=lang_th),
+                    PopupMenuItem(text="English",on_click=lang_en)
+                ]
+            )
+            
         ],
     )
     homepage(page)
