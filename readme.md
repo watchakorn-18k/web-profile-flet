@@ -5,11 +5,14 @@
 # How to run ?
 ```
 git clone https://github.com/watchakorn-18k/web-profile-flet
-
+```
+```
 cd web-profile-flet
-
+```
+```
 pip install -r requirements.txt
-
+```
+```
 flet main.py -d -r -w
 ```
 
